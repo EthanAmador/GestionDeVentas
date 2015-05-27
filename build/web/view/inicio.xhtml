@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                template="./../plantilla/plantillaPrincipal.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="content">
+        <ace:panel header="Bienvenidos a Ingenasoft"  >
+            <h:panelGrid styleClass="animationHolderParent">
+                <h:panelGrid styleClass="animationHolder">
+                    <h:graphicImage id="shake" value="/resources/Imagenes/bienvenido.png" width="500px"/>
+                    <ace:animation event="click" name="shake" />
+                </h:panelGrid>
+            </h:panelGrid>
+        </ace:panel>
+    </ui:define>
+</ui:composition>
