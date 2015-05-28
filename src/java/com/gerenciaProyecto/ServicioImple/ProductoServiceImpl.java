@@ -5,14 +5,40 @@
  */
 package com.gerenciaProyecto.ServicioImple;
 
-import com.gerenciaProyecto.DaoImple.ProductoDaoImpl;
+import com.gerenciaProyecto.Dao.ProductoDao;
+import com.gerenciaProyecto.Entites.Producto;
 import com.gerenciaProyecto.Servicio.ProductoService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Agandio
  */
-public class ProductoServiceImpl implements ProductoService{
+@Service
+public class ProductoServiceImpl implements ProductoService {
     
-    private ProductoDaoImpl productoDaoImpl;
+    @Autowired
+    private ProductoDao productoDao;
+    
+    @Override
+    public List<Producto> listar() {
+        return productoDao.listar();
+    }
+    
+    @Override
+    public void crear(Producto producto) {
+        productoDao.crear(producto);
+    }
+    
+    @Override
+    public List<Producto> listarInactivos() {
+        return productoDao.listarInactivos();
+    }
+    
+    @Override
+    public void modificar(Producto producto) {
+        productoDao.modificar(producto);
+    }
 }
