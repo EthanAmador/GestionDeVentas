@@ -76,6 +76,18 @@ public class Producto implements Serializable {
     @JoinColumn(name = "id_tipoproducto", referencedColumnName = "id")
     @ManyToOne
     private Tipoproducto idTipoproducto;
+    
+    
+    public enum ESTADOS {
+        ACTIVO('A'), INACTIVO('I');
+        public final Character estado;
+        ESTADOS(Character estado) {
+            this.estado = estado;
+        }
+        public Character getEstado() {
+            return estado;
+        }
+    }
 
     public Producto() {
     }
