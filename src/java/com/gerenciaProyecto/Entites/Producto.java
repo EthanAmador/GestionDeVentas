@@ -8,6 +8,7 @@ package com.gerenciaProyecto.Entites;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,11 +43,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Producto.findByIva", query = "SELECT p FROM Producto p WHERE p.iva = :iva"),
     @NamedQuery(name = "Producto.findByEstado", query = "SELECT p FROM Producto p WHERE p.estado = :estado")})
 public class Producto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Basic(optional = false)
+    @Size(min = 1, max = 100)
+    @Column(name = "codigo")
+    private String codigo;
     @Basic(optional = false)
     @Size(min = 1, max = 100)
     @Column(name = "nombre")
@@ -76,14 +84,20 @@ public class Producto implements Serializable {
     @JoinColumn(name = "id_tipoproducto", referencedColumnName = "id")
     @ManyToOne
     private Tipoproducto idTipoproducto;
-    
-    
+
+    @Column(name = "fecha_registro")
+    @Temporal(TemporalType.DATE)
+    private Date fechaRegistro;
+
     public enum ESTADOS {
+
         ACTIVO('A'), INACTIVO('I');
         public final Character estado;
+
         ESTADOS(Character estado) {
             this.estado = estado;
         }
+
         public Character getEstado() {
             return estado;
         }
@@ -195,6 +209,23 @@ public class Producto implements Serializable {
         this.idTipoproducto = idTipoproducto;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -219,5 +250,5 @@ public class Producto implements Serializable {
     public String toString() {
         return "Gerencia_Proyecto.Entites.Producto[ id=" + id + " ]";
     }
-    
+
 }
