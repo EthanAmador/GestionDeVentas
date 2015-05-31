@@ -4,138 +4,160 @@
                 xmlns:ice="http://www.icesoft.com/icefaces/component"
                 xmlns:ace="http://www.icefaces.org/icefaces/components"
                 template="./../plantilla/plantillaPrincipal.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
     <ui:define name="content">
         <ace:panel header="Gestión de Productos"  >
-            <ice:form rendered="#{usuarioBean.listar}">
+            <ice:form rendered="#{productoBean.listar}">
                 <ice:panelGrid columns="1">
                     <ice:panelGrid columns="2">
                         <ice:panelGroup>
-                            <ice:commandButton image="/resources/Imagenes/new.png" title="nuevo" actionListener="#{usuarioBean.onNuevoRegistroz}">
-                                <ice:commandLink actionListener="#{usuarioBean.onNuevoRegistro}" value="nuevo"/>
+                            <ice:commandButton image="/resources/Imagenes/new.png" title="nuevo" actionListener="#{productoBean.onNuevoRegistroz}">
+                                <ice:commandLink actionListener="#{productoBean.onNuevoRegistro}" value="nuevo"/>
                             </ice:commandButton>
                         </ice:panelGroup> 
 
                         <ice:panelGroup>
-                            <ice:commandButton image="/resources/Imagenes/deshacer.png"  rendered="#{usuarioBean.nuevo or usuarioBean.activo or usuarioBean.inactivo}"  title="volver" actionListener="#{usuarioBean.onVolver}">
-                                <ice:commandLink rendered="#{usuarioBean.nuevo or usuarioBean.activo or usuarioBean.inactivo}" actionListener="#{usuarioBean.onVolver}" value="volver"/>
+                            <ice:commandButton image="/resources/Imagenes/deshacer.png"  rendered="#{productoBean.nuevo or productoBean.activo or productoBean.inactivo}"  title="volver" actionListener="#{productoBean.onVolver}">
+                                <ice:commandLink rendered="#{productoBean.nuevo or productoBean.activo or productoBean.inactivo}" actionListener="#{productoBean.onVolver}" value="volver"/>
                             </ice:commandButton>
                         </ice:panelGroup>
                     </ice:panelGrid> 
 
                     <ice:panelGroup>  
                         <ice:outputLabel value="Consulta Productos por estado : " />
-                        <ice:selectOneMenu value="#{usuarioBean.estado}">
+                        <ice:selectOneMenu value="#{productoBean.estado}">
                             <f:selectItem itemLabel="Activos" itemValue="1"/>
                             <f:selectItem itemLabel="Inactivos" itemValue="2"/>
                         </ice:selectOneMenu>
-                        <ice:commandButton  image="/resources/Imagenes/footerButton.png" title="Listar" actionListener="#{usuarioBean.onListarxEstado}"/>
+                        <ice:commandButton  image="/resources/Imagenes/footerButton.png" title="Listar" actionListener="#{productoBean.onListarxEstado}"/>
                     </ice:panelGroup>  
                 </ice:panelGrid>
             </ice:form>
 
 
-            <ice:form>
-                <ice:commandButton rendered="#{usuarioBean.nuevo}"  image="/resources/Imagenes/deshacer.png" title="volver" actionListener="#{usuarioBean.onVolver}">
-                    <ice:commandLink rendered="#{usuarioBean.nuevo}" actionListener="#{usuarioBean.onVolver}" value="volver"/>
-                </ice:commandButton>
-            </ice:form>
-            <ice:form id="idusuario" rendered="#{usuarioBean.nuevo}">
-                <ace:messages id="mensaje" showDetail="true" />
-                <ice:panelGrid columns="1">
-                    <ace:textEntry id="ide" value="#{usuarioBean.usuario.identificacion}"
+            <div align="center" style="border: #000000">
+                <h:form id="idusuario" rendered="#{productoBean.nuevo}">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                    <p><h1>Por favor diligencie los campos del formulario</h1></p>
+                    <ice:panelGrid columns="3" >
+                        <p:outputLabel value="*" style="color: red"/>
+                        <p:inputText id="identificacion" value="#{productoBean.producto.codigo}" required="true" label="Digite su identificacion"/>
+                        <p:watermark for="identificacion" value="Código Producto" /> 
+                        <p:outputLabel value="*" style="color: red"/>
+                        <p:inputText id="nombre1" value="#{productoBean.producto.nombre}" required="true" label="Digite su primer nombre"/>
+                        <p:watermark for="nombre1" value="Nombre Producto" /> 
 
-                                   label="Identificacion: " labelPosition="left"
-                                   required="true" requiredIndicator="(*)" title="Digite su identificación"
-                                   indicatorPosition="right" maxlength="10" 
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="nombre1" value="#{usuarioBean.usuario.nombre1}"
-                                   label="Primer Nombre: " labelPosition="left"
-                                   required="true" requiredIndicator="(*)"
-                                   indicatorPosition="right"
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="nombre2" value="#{usuarioBean.usuario.nombre2}"
-                                   required="false"
-                                   label="Segundo Nombre: " labelPosition="left" 
-                                   styleClass="#{usuarioBean.optColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="apellido1" value="#{usuarioBean.usuario.apellido1}"
-                                   label="Primer Apellido: " labelPosition="left"
-                                   required="true" requiredIndicator="(*)"
-                                   indicatorPosition="right"
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="Apellido2" value="#{usuarioBean.usuario.apellido2}"
-                                   required="false"
-                                   label="Segundo Apellido: " labelPosition="left"
-                                   styleClass="#{usuarioBean.optColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="dir" value="#{usuarioBean.usuario.direccion}"
-                                   label="Dirección: " labelPosition="left"
-                                   required="true" requiredIndicator="(*)" 
-                                   indicatorPosition="right" 
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="tel" value="#{usuarioBean.usuario.telefono}"
-                                   label="Teléfono: " labelPosition="left"
-                                   required="true" requiredIndicator="(*)"
-                                   indicatorPosition="right"
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="email" value="#{usuarioBean.usuario.email}"
-                                   label="Email: " labelPosition="left" title="dirección de email"
-                                   required="true" requiredIndicator="(*)"
-                                   indicatorPosition="right"
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                    <ace:dateTimeEntry id="cal" size="20"
-                                       yearRange="c-50:nnnn"
-                                       timeZone="America/Bogota"
-                                       value="#{usuarioBean.usuario.fechaNacimiento}"
-                                       pattern="dd/MM/yyyy" 
-                                       renderAsPopup="true"
-                                       label="Fecha Nacimiento:"
-                                       labelPosition="left"
-                                       required="true"
-                                       requiredIndicator="(*)"
-                                       indicatorPosition="right"
-                                       navigator="true"
-                                       styleClass="#{usuarioBean.reqColor}"/>
+                        <p:outputLabel value="*" style="color: red"/>
+                        <p:selectOneMenu id="tipoProducot" value="#{productoBean.idTipoProducto}">
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItems value="#{productoBean.onListTipoProducto}" />
+                        </p:selectOneMenu>
+                        <p:watermark for="tipoProducot" value="tipo producto" /> 
 
-                    <ace:textEntry id="username" value="#{usuarioBean.usuario.usuario}"
-                                   label="usuario: " labelPosition="left"
-                                   required="true" requiredIndicator="(*)"
-                                   indicatorPosition="right"
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="password" value="#{usuarioBean.usuario.password}"
-                                   label="password: " labelPosition="left"  
-                                   required="true" requiredIndicator="(* 8 caracteres)"
-                                   indicatorPosition="right"
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                    <ace:textEntry id="pas" value="#{usuarioBean.usuario.password}" 
-                                   label="Confimar Password: " labelPosition="left"
-                                   required="true" requiredIndicator="(*8 caracteres)"
-                                   indicatorPosition="right" 
-                                   styleClass="#{usuarioBean.reqColor}">
-                    </ace:textEntry>
-                </ice:panelGrid>
+                        <p:outputLabel value="*" style="color: red"/>
+                        <p:inputText id="apellido1" value="#{productoBean.producto.preciosCompra}" required="true" label="Digite su primer apellido"/>
+                        <p:watermark for="apellido1" value="¨Precio de compra" /> 
 
-                <ice:panelGrid columns="2">
-                    <ice:commandButton  image="/resources/Imagenes/acceptButton.png" title="registrar"  actionListener="#{usuarioBean.onCrear}"/>
-                    <ice:commandButton image="/resources/Imagenes/renovate.png" title="modificar" actionListener="#{usuarioBean.onModificar}"/>
-                </ice:panelGrid>
-            </ice:form>
+                        <p:outputLabel value="*" style="color: red"/>
+                        <p:inputText id="dir" value="#{productoBean.producto.preciosVenta}" label="Dirección: " required="true"/>
+                        <p:watermark for="dir" value="Precio de Venta" /> 
+
+                        <p:outputLabel value="*" style="color: red"/>
+                        <p:inputText id="tel" value="#{productoBean.producto.cantidadproductos}" label="teléfono " required="true"/>
+                        <p:watermark for="tel" value="Cantidad de productos" /> 
+
+                        <p:outputLabel value="*" style="color: red"/>
+                        <p:selectOneMenu id="tipoTienda" value="#{productoBean.idTienda}">
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItems value="#{productoBean.onListTipoProducto}" />
+                        </p:selectOneMenu>
+                        <p:watermark for="tipoTienda" value="tienda" /> 
+
+                        <p:outputLabel value="*" style="color: red"/>
+                        <p:calendar id="fecNa"  value="#{productoBean.producto.fechaRegistro}" size="20"
+                                    timeZone="America/Bogota" yearRange="c-50:nnnn" navigator="true" pattern="yyyy-MMM-dd" />
+                        <p:watermark for="fecNa" value="Fecha Nacimiento" /> 
+                    </ice:panelGrid>
+                    <p:spacer height="10" />
+                    <p:separator />
+                    <ice:panelGrid columns="2">
+                        <ice:commandButton  image="/resources/Imagenes/acceptButton.png" title="registrar"  actionListener="#{productoBean.onCrear}"/>
+                        <ice:commandButton image="/resources/Imagenes/renovate.png" title="modificar" actionListener="#{productoBean.onModificar}"/>
+                    </ice:panelGrid>
+                </h:form>
+            </div>
+
+            <!--            <ice:form>
+                            <ice:commandButton rendered="#{productoBean.nuevo}"  image="/resources/Imagenes/deshacer.png" title="volver" actionListener="#{productoBean.onVolver}">
+                                <ice:commandLink rendered="#{productoBean.nuevo}" actionListener="#{productoBean.onVolver}" value="volver"/>
+                            </ice:commandButton>
+                        </ice:form>
+                        <ice:form id="idusuario" rendered="#{productoBean.nuevo}">
+                            <ace:messages id="mensaje" showDetail="true" />
+                            <ice:panelGrid columns="1">
+                                <ace:textEntry id="ide" value="#{productoBean.producto.codigo}"
+                                               label="Identificacion: " labelPosition="left"
+                                               required="true" requiredIndicator="(*)" title="Digite código del porducto"
+                                               indicatorPosition="right" maxlength="10" 
+                                               styleClass="#{productoBean.reqColor}">
+                                </ace:textEntry>
+                                <ace:textEntry id="nombre1" value="#{productoBean.producto.nombre}"
+                                               label="Nombre Producto: " labelPosition="left"
+                                               required="true" requiredIndicator="(*)"
+                                               indicatorPosition="right"
+                                               styleClass="#{productoBean.reqColor}">
+                                </ace:textEntry>
+                                <ace:textEntry id="nombre2" value="#{productoBean.producto.preciosCompra}"
+                                               required="false"
+                                               label="Precio Compra: " labelPosition="left" 
+                                               styleClass="#{productoBean.optColor}">
+                                </ace:textEntry>
+                                <ace:textEntry id="apellido1" value="#{productoBean.producto.preciosVenta}"
+                                               label="Precio Venta: " labelPosition="left"
+                                               required="true" requiredIndicator="(*)"
+                                               indicatorPosition="right"
+                                               styleClass="#{productoBean.reqColor}">
+                                </ace:textEntry>
+                                <ace:textEntry id="Apellido2" value="#{productoBean.producto.iva}"
+                                               required="false"
+                                               label="IVA: " labelPosition="left"
+                                               styleClass="#{productoBean.optColor}">
+                                </ace:textEntry>
+                                <ace:textEntry id="dir" value="#{productoBean.producto.cantidadproductos}"
+                                               label="Cantidad Productos: " labelPosition="left"
+                                               required="true" requiredIndicator="(*)" 
+                                               indicatorPosition="right" 
+                                               styleClass="#{productoBean.reqColor}">
+                                </ace:textEntry>
+                                <ace:dateTimeEntry id="cal" size="20"
+                                                   yearRange="c-50:nnnn"
+                                                   timeZone="America/Bogota"
+                                                   value="#{productoBean.producto.fechaRegistro}"
+                                                   pattern="dd/MM/yyyy" 
+                                                   renderAsPopup="true"
+                                                   label="Fecha Nacimiento:"
+                                                   labelPosition="left"
+                                                   required="true"
+                                                   requiredIndicator="(*)"
+                                                   indicatorPosition="right"
+                                                   navigator="true"
+                                                   styleClass="#{productoBean.reqColor}"/>
+                            </ice:panelGrid>
+            
+                            <ice:panelGrid columns="2">
+                                <ice:commandButton  image="/resources/Imagenes/acceptButton.png" title="registrar"  actionListener="#{productoBean.onCrear}"/>
+                                <ice:commandButton image="/resources/Imagenes/renovate.png" title="modificar" actionListener="#{productoBean.onModificar}"/>
+                            </ice:panelGrid>
+                        </ice:form>-->
 
 
-            <!--tabla de u activos en el sistema-->
-            <ice:form id="listausuarios" rendered="#{usuarioBean.activo}">
+            <!--tabla de productos activos en el sistema-->
+            <ice:form id="listaproductos" rendered="#{productoBean.activo}">
                 <ace:dataTable  rowIndexVar="contador" 
-                                var="usuarios" 
-                                value="#{usuarioBean.usuarios}"
+                                var="productos" 
+                                value="#{productoBean.productos}"
                                 paginator="true"
                                 paginatorPosition="bottom"
                                 rows="5"
@@ -145,56 +167,50 @@
                     </ace:column>
 
                     <ace:column headerText="Id">
-                        <ice:outputText value="#{usuarios.id}" />
+                        <ice:outputText value="#{productos.id}" />
                     </ace:column>
 
-                    <ace:column headerText="Identificación ">
-                        <ice:outputText value="#{usuarios.identificacion}" />
+                    <ace:column headerText="Código">
+                        <ice:outputText value="#{productos.codigo}" />
                     </ace:column>
 
-                    <ace:column headerText="Nombres" >
-                        <ice:outputText value="#{usuarios.nombre1} #{usuarios.nombre2}" />
+                    <ace:column headerText="Producto ">
+                        <ice:outputText value="#{productos.nombre}" />
                     </ace:column>
 
-                    <ace:column headerText="Apellido" >
-                        <ice:outputText value="#{usuarios.apellido1} #{usuarios.apellido2}" />
+                    <ace:column headerText="Precio Compra" >
+                        <ice:outputText value="#{productos.preciosCompra}"  />
                     </ace:column>
 
-                    <ace:column headerText="dirección" >
-                        <ice:outputText value="#{usuarios.direccion}" />
-                    </ace:column>
-                    <ace:column headerText="teléfono" >
-                        <ice:outputText value="#{usuarios.telefono}" />
+                    <ace:column headerText="precio Venta" >
+                        <ice:outputText value="#{productos.preciosVenta}" />
                     </ace:column>
 
-                    <ace:column headerText="email" >
-                        <ice:outputText value="#{usuarios.email}" />
+                    <ace:column headerText="Iva aplicar" >
+                        <ice:outputText value="#{productos.iva}" />
                     </ace:column>
-
-                    <ace:column headerText="FechaNacimiento" >
-                        <ice:outputText value="#{usuarios.fechaNacimiento}">
-                            <f:convertDateTime dateStyle="short" pattern="dd-MM-yyyy" timeZone="America/Bogota"/>
-                        </ice:outputText>
+                    <ace:column headerText="fecha registro" >
+                        <ice:outputText value="#{productos.fechaRegistro}" />
                     </ace:column>
 
                     <ace:column headerText="Operaciónes" >
-                        <ice:commandButton image="/resources/Imagenes/delete.png" title="Deshabilitar"  actionListener="#{usuarioBean.onEliminar}">
-                            <f:attribute name="action" value="#{usuarios}"/>
+                        <ice:commandButton image="/resources/Imagenes/delete.png" title="Deshabilitar"  actionListener="#{productoBean.onEliminar}">
+                            <f:attribute name="action" value="#{productos}"/>
                         </ice:commandButton>
 
-                        <ice:commandButton image="/resources/Imagenes/edit.png"   title="Editar" actionListener="#{usuarioBean.onSeleccionarUsuario}">
-                            <f:attribute name="action" value="#{usuarios}"/>
+                        <ice:commandButton image="/resources/Imagenes/edit.png"   title="Editar" actionListener="#{productoBean.onSeleccionarUsuario}">
+                            <f:attribute name="action" value="#{productos}"/>
                         </ice:commandButton>
 
                     </ace:column>
                 </ace:dataTable>
             </ice:form>
 
-            <!--usuarios inactivos-->
-            <ice:form id="listausuariosinactivos" rendered="#{usuarioBean.inactivo}">
+            <!--productos inactivos-->
+            <ice:form id="productosInactivos" rendered="#{productoBean.inactivo}">
                 <ace:dataTable  rowIndexVar="contador" 
-                                var="usuarios" 
-                                value="#{usuarioBean.listaTablaUsuriosInactivos}"
+                                var="productos" 
+                                value="#{productoBean.productosInactivos}"
                                 paginator="true"
                                 paginatorPosition="bottom"
                                 rows="5"
@@ -204,41 +220,35 @@
                     </ace:column>
 
                     <ace:column headerText="Id">
-                        <ice:outputText value="#{usuarios.id}" />
+                        <ice:outputText value="#{productos.id}" />
                     </ace:column>
 
-                    <ace:column headerText="Identificación ">
-                        <ice:outputText value="#{usuarios.identificacion}" />
+                    <ace:column headerText="Código">
+                        <ice:outputText value="#{productos.codigo}" />
                     </ace:column>
 
-                    <ace:column headerText="NombreS" >
-                        <ice:outputText value="#{usuarios.nombre1} #{usuarios.nombre2}" />
+                    <ace:column headerText="Producto ">
+                        <ice:outputText value="#{productos.nombre}" />
                     </ace:column>
 
-                    <ace:column headerText="Apellido" >
-                        <ice:outputText value="#{usuarios.apellido1} #{usuarios.apellido2}" />
+                    <ace:column headerText="Precio Compra" >
+                        <ice:outputText value="#{productos.preciosCompra}"  />
                     </ace:column>
 
-                    <ace:column headerText="dirección" >
-                        <ice:outputText value="#{usuarios.direccion}" />
-                    </ace:column>
-                    <ace:column headerText="teléfono" >
-                        <ice:outputText value="#{usuarios.telefono}" />
+                    <ace:column headerText="precio Venta" >
+                        <ice:outputText value="#{productos.preciosVenta}" />
                     </ace:column>
 
-                    <ace:column headerText="email" >
-                        <ice:outputText value="#{usuarios.email}" />
+                    <ace:column headerText="Iva aplicar" >
+                        <ice:outputText value="#{productos.iva}" />
                     </ace:column>
-
-                    <ace:column headerText="FechaNacimiento" >
-                        <ice:outputText value="#{usuarios.fechaNacimiento}">
-                            <f:convertDateTime dateStyle="short" pattern="dd-MM-yyyy" timeZone="America/Bogota"/>
-                        </ice:outputText>
+                    <ace:column headerText="fecha registro" >
+                        <ice:outputText value="#{productos.fechaRegistro}" />
                     </ace:column>
 
                     <ace:column headerText="Operaciónes" >
-                        <ice:commandButton image="/resources/Imagenes/activateButton.png" title="Activar"  actionListener="#{usuarioBean.onActivar}">
-                            <f:attribute name="action" value="#{usuarios}"/>
+                        <ice:commandButton image="/resources/Imagenes/activateButton.png" title="Activar"  actionListener="#{productoBean.onActivar}">
+                            <f:attribute name="action" value="#{productos}"/>
                         </ice:commandButton>
                     </ace:column>
                 </ace:dataTable>
