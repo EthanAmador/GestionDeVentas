@@ -5,13 +5,21 @@
  */
 package com.gerenciaProyecto.ServicioImple;
 
+import com.gerenciaProyecto.Entites.Venta;
 import com.gerenciaProyecto.Servicio.VentaService;
+import org.springframework.stereotype.Service;
+
 
 /**
  *
  * @author Agandio
  */
+@Service
 public class VentaServiceImpl implements VentaService {
-    
-    private VentaServiceImpl ventaServiceImpl;
+
+    @Override
+    public void AgregarVenta(Venta p_Venta) {
+        
+    }
+ 
 }
