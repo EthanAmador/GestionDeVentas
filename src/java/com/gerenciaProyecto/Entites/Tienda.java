@@ -67,8 +67,24 @@ public class Tienda implements Serializable {
     @OneToMany(mappedBy = "idTienda")
     private Collection<Producto> productoCollection;
 
+    
+      public enum ESTADOS {
+
+        ACTIVO('A'), INACTIVO('I');
+        public final Character estado;
+
+        ESTADOS(Character estado) {
+            this.estado = estado;
+        }
+
+        public Character getEstado() {
+            return estado;
+        }
+    }
+    
     public Tienda() {
     }
+       
 
     public Tienda(Integer id) {
         this.id = id;

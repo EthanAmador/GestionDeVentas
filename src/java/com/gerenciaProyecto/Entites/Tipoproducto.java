@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tipoproducto.findByNombre", query = "SELECT t FROM Tipoproducto t WHERE t.nombre = :nombre"),
     @NamedQuery(name = "Tipoproducto.findByEstado", query = "SELECT t FROM Tipoproducto t WHERE t.estado = :estado")})
 public class Tipoproducto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -46,6 +47,20 @@ public class Tipoproducto implements Serializable {
     private Character estado;
     @OneToMany(mappedBy = "idTipoproducto")
     private Collection<Producto> productoCollection;
+
+    public enum ESTADOS {
+
+        ACTIVO('A'), INACTIVO('I');
+        public final Character estado;
+
+        ESTADOS(Character estado) {
+            this.estado = estado;
+        }
+
+        public Character getEstado() {
+            return estado;
+        }
+    }
 
     public Tipoproducto() {
     }
@@ -117,5 +132,5 @@ public class Tipoproducto implements Serializable {
     public String toString() {
         return "Gerencia_Proyecto.Entites.Tipoproducto[ id=" + id + " ]";
     }
-    
+
 }

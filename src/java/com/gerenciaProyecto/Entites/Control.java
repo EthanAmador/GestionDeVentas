@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Control.findByFechaFin", query = "SELECT c FROM Control c WHERE c.fechaFin = :fechaFin"),
     @NamedQuery(name = "Control.findByEstado", query = "SELECT c FROM Control c WHERE c.estado = :estado")})
 public class Control implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -62,6 +63,20 @@ public class Control implements Serializable {
     private Collection<Usuario> usuarioCollection;
     @OneToMany(mappedBy = "idControl")
     private Collection<Producto> productoCollection;
+
+    public enum ESTADOS {
+
+        ACTIVO('A'), INACTIVO('I');
+        public final Character estado;
+
+        ESTADOS(Character estado) {
+            this.estado = estado;
+        }
+
+        public Character getEstado() {
+            return estado;
+        }
+    }
 
     public Control() {
     }
@@ -175,5 +190,5 @@ public class Control implements Serializable {
     public String toString() {
         return "Gerencia_Proyecto.Entites.Control[ id=" + id + " ]";
     }
-    
+
 }
