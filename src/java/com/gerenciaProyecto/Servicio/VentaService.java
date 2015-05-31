@@ -6,10 +6,13 @@
 
 package com.gerenciaProyecto.Servicio;
 
+import com.gerenciaProyecto.Entites.Venta; 
+
 /**
  *
  * @author Yer son
  */
 public interface VentaService {
     
+    public void AgregarVenta(Venta p_Venta); 
 }
