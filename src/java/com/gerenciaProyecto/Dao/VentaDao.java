@@ -6,10 +6,14 @@
 
 package com.gerenciaProyecto.Dao;
 
+import com.gerenciaProyecto.Entites.Venta;
+
 /**
  *
  * @author Yer son
  */
 public interface VentaDao {
     
+    public void AgregarVenta(Venta p_Venta); 
+   
 }

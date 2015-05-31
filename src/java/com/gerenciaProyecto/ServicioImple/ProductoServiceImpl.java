@@ -41,4 +41,9 @@ public class ProductoServiceImpl implements ProductoService {
     public void modificar(Producto producto) {
         productoDao.modificar(producto);
     }
+
+    @Override
+    public Producto ObtenerProductoId(Integer p_IdProducto) {
+        return null; 
+    }
 }

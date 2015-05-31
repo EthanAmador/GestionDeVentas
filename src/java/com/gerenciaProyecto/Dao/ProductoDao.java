@@ -23,4 +23,5 @@ public interface ProductoDao {
 
     public void modificar(Producto producto);
    
+    public Producto ObtenerProductoId(Integer p_IdProducto); 
 }

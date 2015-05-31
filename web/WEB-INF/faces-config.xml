@@ -32,4 +32,11 @@
     
         <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>ventaBean</managed-bean-name>
+        <managed-bean-class>com.gerenciaProyecto.Beans.VentaBean</managed-bean-class>
+    
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
 </faces-config>
