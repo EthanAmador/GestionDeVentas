@@ -11,7 +11,7 @@
     <ui:define name="content">
         <ace:panel header="Gestión de Usuarios"  >
             <h:form rendered="#{usuarioBean.listar}" >
-                              <ice:panelGrid columns="1">
+                <ice:panelGrid columns="1">
                     <ice:panelGrid columns="2">
                         <ice:panelGroup>
                             <ice:commandButton image="/resources/Imagenes/new.png" title="nuevo" actionListener="#{usuarioBean.onNuevoRegistro(ae)}">
@@ -80,6 +80,7 @@
                     </ice:panelGrid>
                     <p:spacer height="10" />
                     <p:separator />
+                    
                     <h:panelGrid columns="3" id="matchGrid" cellpadding="5">  
                         <p:outputLabel value="*" style="color: red"/>
                         <p:inputText id="user" value="#{usuarioBean.usuario.username}" required="true" label="Username"/>
@@ -95,7 +96,9 @@
                         </p:password>
                         <p:watermark for="pwd2" value="Confirmar Password " />  
                     </h:panelGrid>
-
+                    <p:spacer height="10" />
+                    <p:separator />
+                    
                     <ice:panelGrid columns="2">
                         <ice:commandButton  image="/resources/Imagenes/acceptButton.png" title="registrar"  actionListener="#{usuarioBean.onCrear}"/>
                         <ice:commandButton image="/resources/Imagenes/renovate.png" title="modificar" actionListener="#{usuarioBean.onModificar}"/>
