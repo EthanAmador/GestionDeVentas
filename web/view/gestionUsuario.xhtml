@@ -75,7 +75,8 @@
                         <p:watermark for="email" value="Email" /> 
                         <p:outputLabel value="*" style="color: red"/>
                         <p:calendar id="fecNa"  value="#{usuarioBean.usuario.fechaNacimiento}" size="20"
-                                    timeZone="America/Bogota" yearRange="c-50:nnnn" navigator="true" pattern="yyyy-MMM-dd" />
+                                    timeZone="America/Bogota" yearRange="c-50:nnnn" navigator="true" pattern="yyyy-MMM-dd"
+                                    onkeydown="javascript:return false;"/>
                         <p:watermark for="fecNa" value="Fecha Nacimiento" /> 
                     </ice:panelGrid>
                     <p:spacer height="10" />
