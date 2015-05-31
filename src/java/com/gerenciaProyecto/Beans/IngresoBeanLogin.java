@@ -18,7 +18,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,11 +40,9 @@ public class IngresoBeanLogin implements Serializable {
     private Usuario usuario;
 
     @Autowired
-    //@Qualifier("usuarioBean")
     private UsuarioBean usuarioBean;
 
     @Autowired
-    //@Qualifier("usuarioService")
     private UsuarioService usuarioService;
 
     public IngresoBeanLogin() {
@@ -59,7 +56,6 @@ public class IngresoBeanLogin implements Serializable {
 
 //<editor-fold defaultstate="collapsed" desc="action">
     public void onLogin(ActionEvent ev) {
-//        redireccion = "vistaInicial.xhtml";
         FacesContext context = FacesContext.getCurrentInstance();
         try {
 
@@ -70,8 +66,6 @@ public class IngresoBeanLogin implements Serializable {
         if (usuario.getId() != null) {
             if (usuario.getUsername().equals(user)) {
                 if (usuario.getPassword().equals(password)) {
-//                    redireccion = "../view/inicio.xhtml";
-
                     try {
                         context.getExternalContext().redirect("./../view/inicio.xhtml");
                     } catch (IOException ex) {
