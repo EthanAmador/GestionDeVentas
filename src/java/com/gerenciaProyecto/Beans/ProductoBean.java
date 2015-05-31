@@ -288,14 +288,14 @@ public class ProductoBean implements Serializable {
 
     public LinkedList<SelectItem> getListaTipoProductos() {
         if (listaTipoProductos == null) {
-            listaTipoProductos = (LinkedList<SelectItem>) this.ListaTiendas();
+            listaTipoProductos = (LinkedList<SelectItem>) this.ListaTipoProductos();
         }
         return listaTipoProductos;
     }
 
     public LinkedList<SelectItem> getListaTiendas() {
         if (listaTiendas == null) {
-            listaTiendas = (LinkedList<SelectItem>) this.ListaTipoProductos();
+            listaTiendas = (LinkedList<SelectItem>) this.ListaTiendas() ;
         }
         return listaTiendas;
     }
