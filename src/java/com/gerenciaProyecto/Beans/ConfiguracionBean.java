@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
  * @author Agandio
  */
 
-@Named(value = "configuracionBean")
+
 @ViewScoped
 @Controller
 public class ConfiguracionBean implements Serializable{

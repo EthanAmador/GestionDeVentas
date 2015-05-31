@@ -56,42 +56,42 @@
                         <p:watermark for="nombre1" value="Nombre Producto" /> 
 
                         <p:outputLabel value="*" style="color: red"/>
-                        <p:selectOneMenu id="tipoProducot" value="#{productoBean.idTipoProducto}">
-                            <f:selectItem itemLabel="Select One" itemValue="" />
+                        <p:selectOneMenu id="tipoProducot" value="#{productoBean.idTipoProducto}" style="width: 20px">
+                            <f:selectItem itemLabel="Seleccione un Tipo de producto" itemValue="" />
                             <f:selectItems value="#{productoBean.listaTipoProductos}" />
                         </p:selectOneMenu>
                         <p:watermark for="tipoProducot" value="tipo producto" /> 
 
                         <p:outputLabel value="*" style="color: red"/>
-                        <p:inputText id="apellido1" value="#{productoBean.producto.preciosCompra}" required="true" label="Digite su primer apellido"/>
+                        <p:inputText id="apellido1" value="#{productoBean.producto.preciosCompra}" required="true" label="Precio Compra"/>
                         <p:watermark for="apellido1" value="¨Precio de compra" /> 
 
                         <p:outputLabel value="*" style="color: red"/>
-                        <p:inputText id="dir" value="#{productoBean.producto.preciosVenta}" label="Dirección: " required="true"/>
+                        <p:inputText id="dir" value="#{productoBean.producto.preciosVenta}"  label="Precios venta " required="true"/>
                         <p:watermark for="dir" value="Precio de Venta" /> 
 
                         <p:outputLabel value="*" style="color: red"/>
-                        <p:inputText id="tel" value="#{productoBean.producto.cantidadproductos}" label="teléfono " required="true"/>
+                        <p:inputText id="tel" value="#{productoBean.producto.cantidadproductos}" label="cantida Productos" required="true"/>
                         <p:watermark for="tel" value="Cantidad de productos" /> 
 
                         <p:outputLabel value="*" style="color: red"/>
-                        <p:selectOneMenu id="tipoTienda" value="#{productoBean.idTienda}">
-                            <f:selectItem itemLabel="Select One" itemValue="" />
+                        <p:selectOneMenu id="tipoTienda" value="#{productoBean.idTienda}" style="width: 20px">
+                            <f:selectItem itemLabel="Seleccione una tienda " itemValue="" />
                             <f:selectItems value="#{productoBean.listaTiendas}" />
                         </p:selectOneMenu>
                         <p:watermark for="tipoTienda" value="tienda" /> 
 
                         <p:outputLabel value="*" style="color: red"/>
                         <p:calendar id="fecNa"  value="#{productoBean.producto.fechaRegistro}" size="20"
-                                    timeZone="America/Bogota" yearRange="c-50:nnnn" navigator="true" pattern="yyyy-MMM-dd" onkeydown="javascript:return false;" />
-                        <p:watermark for="fecNa" value="Fecha Nacimiento" /> 
+                                    timeZone="America/Bogota" yearRange="c-50:nnnn" navigator="true" pattern="yyyy-MMM-dd"/>
+                        <p:watermark for="fecNa" value="Fecha Registro" /> 
                     </ice:panelGrid>
                     <p:spacer height="10" />
                     <p:separator />
-                    <ice:panelGrid columns="2">
-                        <ice:commandButton  image="/resources/Imagenes/acceptButton.png" title="registrar"  actionListener="#{productoBean.onCrearProducto}"/>
-                        <ice:commandButton image="/resources/Imagenes/renovate.png" title="modificar" actionListener="#{productoBean.onModificarProducto}"/>
-                    </ice:panelGrid>
+                    <p:panelGrid columns="2">
+                        <p:commandButton  actionListener="#{productoBean.onCrearProducto}"  icon="ui-icon-disk"/>
+                        <p:commandButton  title="modificar" actionListener="#{productoBean.onModificarProducto}"  icon="ui-icon-pencil"/>
+                    </p:panelGrid>
                 </h:form>
             </div>
             <!--tabla de productos activos en el sistema-->

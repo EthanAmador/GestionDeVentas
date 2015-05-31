@@ -8,10 +8,6 @@ package com.gerenciaProyecto.Servicio;
 import com.gerenciaProyecto.Entites.Usuario;
 import java.util.List;
 
-/**
- *
- * @author Yerson
- */
 public interface UsuarioService {
 
     public List<Usuario> listar();

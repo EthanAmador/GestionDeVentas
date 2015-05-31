@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
  *
  * @author Agandio
  */
-@Named(value = "tiendaBean")
+
 @ViewScoped
 @Controller
 public class TiendaBean implements Serializable {

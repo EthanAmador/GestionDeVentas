@@ -50,16 +50,19 @@ public class IngresoBeanLogin implements Serializable {
 
     @PostConstruct
     public void init() {
+        try{
         usuario = new Usuario();
         usuarioBean = new UsuarioBean();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 //<editor-fold defaultstate="collapsed" desc="action">
     public void onLogin(ActionEvent ev) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-
-            usuario = (Usuario) usuarioService.usuarioLogin(user);
+            usuario = (Usuario)usuarioService.usuarioLogin(user);
         } catch (Exception tr) {
             tr.printStackTrace();
         }

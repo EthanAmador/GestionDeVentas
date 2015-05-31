@@ -8,10 +8,12 @@ package com.gerenciaProyecto.Beans;
 import com.gerenciaProyecto.Entites.Control;
 import com.gerenciaProyecto.Entites.Usuario;
 import com.gerenciaProyecto.Servicio.UsuarioService;
+import com.gerenciaProyecto.Util.PanelBean;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+//import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -28,6 +30,9 @@ public class UsuarioBean implements Serializable {
 
     @Autowired
     private UsuarioService usuarioService;
+
+//    @ManagedProperty(value = "#{panelBean}")
+//    private PanelBean panelBean;
 
     private List<Usuario> usuarios;
     private List<Usuario> listaTablaUsuriosInactivos;
@@ -46,9 +51,9 @@ public class UsuarioBean implements Serializable {
      * Creates a new instance of UsuarioBean
      */
     public UsuarioBean() {
-      }
+    }
 
-   @PostConstruct
+    @PostConstruct
     public void init() {
         try {
             listar = true;
@@ -56,7 +61,7 @@ public class UsuarioBean implements Serializable {
             activo = false;
             inactivo = false;
 
-            control = new Control(3, 'A');
+            control = new Control(3, Control.ESTADOS.ACTIVO.getEstado());
             usuario = new Usuario();
             usuarios = usuarioService.listar();
             listaTablaUsuriosInactivos = usuarioService.listaInactivos();
@@ -72,6 +77,7 @@ public class UsuarioBean implements Serializable {
         if (control != null) {
             usuario.setIdControl(control);
         } else {
+//              panelBean.showError("No se ha encontrado registro de control");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Informacion:  ", "No se ha encontrado registro de control"));
         }
         try {
@@ -81,6 +87,7 @@ public class UsuarioBean implements Serializable {
         }
         usuarios = usuarioService.listar();
         usuario = new Usuario();
+//        panelBean.showOk("Usuario Creado de forma exitosa");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Creado de forma exitosa"));
     }
 
@@ -100,6 +107,7 @@ public class UsuarioBean implements Serializable {
         listaTablaUsuriosInactivos = usuarioService.listaInactivos();
         usuarios = usuarioService.listar();
         usuario = new Usuario();
+//          panelBean.showInfo("Registro modificado  de forma exitosa");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Modificado de forma exitosa"));
     }
 

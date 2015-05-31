@@ -75,8 +75,7 @@
                         <p:watermark for="email" value="Email" /> 
                         <p:outputLabel value="*" style="color: red"/>
                         <p:calendar id="fecNa"  value="#{usuarioBean.usuario.fechaNacimiento}" size="20"
-                                    timeZone="America/Bogota" yearRange="c-50:nnnn" navigator="true" pattern="yyyy-MMM-dd"
-                                    onkeydown="javascript:return false;"/>
+                                    timeZone="America/Bogota" yearRange="c-50:nnnn" navigator="true" pattern="yyyy-MMM-dd"/>
                         <p:watermark for="fecNa" value="Fecha Nacimiento" /> 
                     </ice:panelGrid>
                     <p:spacer height="10" />
@@ -97,17 +96,18 @@
                         </p:password>
                         <p:watermark for="pwd2" value="Confirmar Password " />  
                     </h:panelGrid>
+                    
                     <p:spacer height="10" />
                     <p:separator />
                     
-                    <ice:panelGrid columns="2">
-                        <ice:commandButton  image="/resources/Imagenes/acceptButton.png" title="registrar"  actionListener="#{usuarioBean.onCrear}"/>
-                        <ice:commandButton image="/resources/Imagenes/renovate.png" title="modificar" actionListener="#{usuarioBean.onModificar}"/>
-                    </ice:panelGrid>
+                    <p:panelGrid columns="2">
+                        <p:commandButton  title="registrar"  actionListener="#{usuarioBean.onCrear}" icon="ui-icon-disk"/>
+                        <p:commandButton  title="modificar" actionListener="#{usuarioBean.onModificar}" icon="ui-icon-pencil"/>
+                    </p:panelGrid>
                 </h:form>
             </div>
 
-            <!--tabla de u activos en el sistema-->
+            <!--tabla de usuarios activos en el sistema-->
             <h:form id="listausuarios" rendered="#{usuarioBean.activo}">
                 <ace:dataTable  rowIndexVar="contador" 
                                 var="usuarios" 

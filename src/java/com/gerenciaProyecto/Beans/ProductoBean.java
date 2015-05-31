@@ -91,7 +91,8 @@ public class ProductoBean implements Serializable {
         if (control != null) {
             producto.setIdControl(control);
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Informacion:  ", "No se ha encontrado registro de control o de tiedas"));
+             panelBean.showError("No se ha encontrado registro de control");
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Informacion:  ", "No se ha encontrado registro de control o de tiedas"));
         }
 
         if (getIdTienda() != null || !getIdTienda().isEmpty()) {

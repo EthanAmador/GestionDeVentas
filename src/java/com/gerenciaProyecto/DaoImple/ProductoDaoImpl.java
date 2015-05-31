@@ -24,15 +24,13 @@ public class ProductoDaoImpl implements ProductoDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    EntityManager em = getEntityManager();
-
     public EntityManager getEntityManager() {
         return entityManager;
     }
 
     @Override
     public List<Producto> listar() {
-
+        EntityManager em = getEntityManager();
         List<Producto> lista = new ArrayList<Producto>();
         Query q = em.createQuery("SELECT p FROM Producto p where p.estado= :estado ");
         q.setParameter("estado", Producto.ESTADOS.ACTIVO.getEstado());
@@ -42,6 +40,7 @@ public class ProductoDaoImpl implements ProductoDao {
 
     @Override
     public void crear(Producto producto) {
+        EntityManager em = getEntityManager();
         try {
             em.persist(producto);
             em.flush();
@@ -52,6 +51,7 @@ public class ProductoDaoImpl implements ProductoDao {
 
     @Override
     public List<Producto> listarInactivos() {
+            EntityManager em = getEntityManager();
         List<Producto> lista = new ArrayList<Producto>();
         Query q = em.createQuery("SELECT p FROM Producto p where p.estado= :estado ");
         q.setParameter("estado", Producto.ESTADOS.INACTIVO.getEstado());
@@ -61,24 +61,27 @@ public class ProductoDaoImpl implements ProductoDao {
 
     @Override
     public void modificar(Producto producto) {
-        try{
+            EntityManager em = getEntityManager();
+        try {
             em.merge(producto);
             em.flush();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-            
+
     }
 
     @Override
     public Producto ObtenerProductoId(Integer p_IdProducto) {
+          EntityManager em = getEntityManager();
         List<Producto> lista = new ArrayList<Producto>();
-        Query q = em.createQuery("SELECT p FROM Producto p WHERE p.id = :id"); 
-        q.setParameter("id", p_IdProducto); 
-        lista = q.getResultList(); 
+        Query q = em.createQuery("SELECT p FROM Producto p WHERE p.id = :id");
+        q.setParameter("id", p_IdProducto);
+        lista = q.getResultList();
         for (Producto lista1 : lista) {
-            if(lista1.getId()== p_IdProducto)
-                return lista1; 
+            if (lista1.getId() == p_IdProducto) {
+                return lista1;
+            }
         }
         return null;
     }
