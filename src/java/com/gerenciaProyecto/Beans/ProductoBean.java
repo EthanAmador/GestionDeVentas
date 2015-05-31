@@ -41,6 +41,10 @@ public class ProductoBean implements Serializable {
 
     private List<Producto> productos;
     private List<Producto> productosInactivos;
+
+    private LinkedList<SelectItem> listaTipoProductos;
+    private LinkedList<SelectItem> listaTiendas;
+
     private Producto producto;
     private Control control;
     private Tienda tienda;
@@ -81,7 +85,7 @@ public class ProductoBean implements Serializable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="action">
-    public void onCrear(ActionEvent ev) {
+    public void onCrearProducto(ActionEvent ev) {
         producto.setEstado(Producto.ESTADOS.ACTIVO.getEstado());
 
         if (control != null) {
@@ -102,8 +106,7 @@ public class ProductoBean implements Serializable {
         } else {
             panelBean.showWarning("Debe selecionar una tipo de producto");
         }
-        producto.getIdTipoproducto();
-
+//        producto.getIdTipoproducto();
         try {
             productoService.crear(producto);
         } catch (Exception e) {
@@ -114,7 +117,7 @@ public class ProductoBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Creado de forma exitosa"));
     }
 
-    public void onEliminar(ActionEvent event) {
+    public void onEliminarProducto(ActionEvent event) {
         producto = (Producto) event.getComponent().getAttributes().get("action");
         producto.setEstado(Producto.ESTADOS.INACTIVO.getEstado());
         productoService.modificar(producto);
@@ -123,7 +126,7 @@ public class ProductoBean implements Serializable {
         producto = new Producto();
     }
 
-    public void onActivar(ActionEvent event) {
+    public void onActivarProducto(ActionEvent event) {
         producto = (Producto) event.getComponent().getAttributes().get("action");
         producto.setEstado(Producto.ESTADOS.ACTIVO.getEstado());
         productoService.modificar(producto);
@@ -133,7 +136,7 @@ public class ProductoBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Modificado de forma exitosa"));
     }
 
-    public void onListarxEstado(ActionEvent event) {
+    public void onListarProductoxEstado(ActionEvent event) {
         if (getEstado().compareTo("1") == 0) {
             activo = true;
             inactivo = false;
@@ -143,22 +146,27 @@ public class ProductoBean implements Serializable {
         }
     }
 
-    public void onNuevoRegistro(ActionEvent ae) {
+    public void onNuevoRegistro(ActionEvent event) {
         listar = false;
         nuevo = true;
         activo = true;
         inactivo = false;
     }
 
-    public void onVolver(ActionEvent event) {
+    public void onReturn(ActionEvent event) {
         listar = true;
         nuevo = false;
         activo = false;
     }
 
-    public void onModificar(ActionEvent ae) {
+    public void onModificarProducto(ActionEvent event) {
         productoService.modificar(producto);
         producto = new Producto();
+    }
+
+    public void onSelectProducto(ActionEvent event) {
+        producto = (Producto) event.getComponent().getAttributes().get("action");
+        onNuevoRegistro(event);
     }
 //</editor-fold>
 
@@ -275,6 +283,20 @@ public class ProductoBean implements Serializable {
         this.tipoProducto = tipoProducto;
     }
 
+    public LinkedList<SelectItem> getListaTipoProductos() {
+        if (listaTipoProductos == null) {
+            listaTipoProductos = (LinkedList<SelectItem>) this.ListaTiendas();
+        }
+        return listaTipoProductos;
+    }
+
+    public LinkedList<SelectItem> getListaTiendas() {
+        if (listaTiendas == null) {
+            listaTiendas = (LinkedList<SelectItem>) this.ListaTipoProductos();
+        }
+        return listaTiendas;
+    }
+
     public String getReqColor() {
         return reqColor;
     }
@@ -285,7 +307,7 @@ public class ProductoBean implements Serializable {
 
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="itemList">
-    public List<SelectItem> onListTienda() {
+    public List<SelectItem> ListaTiendas() {
         List<SelectItem> list = new LinkedList<SelectItem>();
         try {
             list = ValoresSelectOneMenu.getListTipoTienda();
@@ -296,7 +318,7 @@ public class ProductoBean implements Serializable {
         return list;
     }
 
-    public List<SelectItem> onListTipoProducto() {
+    public List<SelectItem> ListaTipoProductos() {
         List<SelectItem> list = new LinkedList<SelectItem>();
         try {
             list = ValoresSelectOneMenu.getListTipoProducto();
