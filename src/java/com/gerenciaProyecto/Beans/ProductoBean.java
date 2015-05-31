@@ -89,6 +89,7 @@ public class ProductoBean implements Serializable {
         producto.setEstado(Producto.ESTADOS.ACTIVO.getEstado());
 
         if (control != null) {
+            
             producto.setIdControl(control);
         } else {
              panelBean.showError("No se ha encontrado registro de control");
@@ -97,13 +98,14 @@ public class ProductoBean implements Serializable {
 
         if (getIdTienda() != null || !getIdTienda().isEmpty()) {
             tienda = new Tienda(Integer.parseInt(getIdTienda()), Tienda.ESTADOS.ACTIVO.getEstado());
-            producto.getIdTienda();
+            producto.setIdTienda(tienda);
         } else {
             panelBean.showWarning("Debe selecionar una tienda para asociar el producto");
         }
 
         if (getIdTipoProducto() != null || !getIdTipoProducto().isEmpty()) {
             tipoProducto = new Tipoproducto(Integer.parseInt(getIdTipoProducto()), estado, Producto.ESTADOS.ACTIVO.getEstado());
+            producto.setIdTipoproducto(tipoProducto);
         } else {
             panelBean.showWarning("Debe selecionar una tipo de producto");
         }
