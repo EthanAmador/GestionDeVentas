@@ -8,7 +8,6 @@ package com.gerenciaProyecto.Beans;
 import com.gerenciaProyecto.Entites.Control;
 import com.gerenciaProyecto.Entites.Usuario;
 import com.gerenciaProyecto.Servicio.UsuarioService;
-import com.gerenciaProyecto.Util.PanelBean;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -90,7 +89,7 @@ public class UsuarioBean implements Serializable {
 //        panelBean.showOk("Usuario Creado de forma exitosa");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Creado de forma exitosa"));
     }
-
+    
     public void onEliminar(ActionEvent event) {
         usuario = (Usuario) event.getComponent().getAttributes().get("action");
         usuario.setEstado(Usuario.ESTADOS.INACTIVO.getEstado());
@@ -135,6 +134,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public void onModificar(ActionEvent ae) {
+        usuario.setEstado(Usuario.ESTADOS.ACTIVO.getEstado());
         usuarioService.modificar(usuario);
         usuario = new Usuario();
     }

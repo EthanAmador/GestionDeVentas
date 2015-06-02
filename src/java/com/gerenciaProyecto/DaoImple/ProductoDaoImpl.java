@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -39,9 +40,12 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
+    @Transactional
     public void crear(Producto producto) {
         EntityManager em = getEntityManager();
         try {
+//            producto.set
+            
             em.persist(producto);
             em.flush();
         } catch (Exception e) {
@@ -51,7 +55,7 @@ public class ProductoDaoImpl implements ProductoDao {
 
     @Override
     public List<Producto> listarInactivos() {
-            EntityManager em = getEntityManager();
+        EntityManager em = getEntityManager();
         List<Producto> lista = new ArrayList<Producto>();
         Query q = em.createQuery("SELECT p FROM Producto p where p.estado= :estado ");
         q.setParameter("estado", Producto.ESTADOS.INACTIVO.getEstado());
@@ -60,8 +64,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
+    @Transactional
     public void modificar(Producto producto) {
-            EntityManager em = getEntityManager();
+        EntityManager em = getEntityManager();
         try {
             em.merge(producto);
             em.flush();
@@ -73,7 +78,7 @@ public class ProductoDaoImpl implements ProductoDao {
 
     @Override
     public Producto ObtenerProductoId(Integer p_IdProducto) {
-          EntityManager em = getEntityManager();
+        EntityManager em = getEntityManager();
         List<Producto> lista = new ArrayList<Producto>();
         Query q = em.createQuery("SELECT p FROM Producto p WHERE p.id = :id");
         q.setParameter("id", p_IdProducto);

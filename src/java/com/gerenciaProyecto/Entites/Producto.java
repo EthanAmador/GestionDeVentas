@@ -7,7 +7,6 @@ package com.gerenciaProyecto.Entites;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,14 +16,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -73,8 +70,8 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "estado")
     private Character estado;
-    @OneToMany(mappedBy = "idProducto")
-    private Collection<Productoventa> productoventaCollection;
+//    @OneToMany(mappedBy = "idProducto")
+//    private Collection<Productoventa> productoventaCollection;
     @JoinColumn(name = "id_control", referencedColumnName = "id")
     @ManyToOne
     private Control idControl;
@@ -176,14 +173,14 @@ public class Producto implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
-    public Collection<Productoventa> getProductoventaCollection() {
-        return productoventaCollection;
-    }
-
-    public void setProductoventaCollection(Collection<Productoventa> productoventaCollection) {
-        this.productoventaCollection = productoventaCollection;
-    }
+//    @XmlTransient
+//    public Collection<Productoventa> getProductoventaCollection() {
+//        return productoventaCollection;
+//    }
+//
+//    public void setProductoventaCollection(Collection<Productoventa> productoventaCollection) {
+//        this.productoventaCollection = productoventaCollection;
+//    }
 
     public Control getIdControl() {
         return idControl;

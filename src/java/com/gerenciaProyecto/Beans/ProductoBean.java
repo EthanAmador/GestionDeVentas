@@ -10,14 +10,12 @@ import com.gerenciaProyecto.Entites.Producto;
 import com.gerenciaProyecto.Entites.Tienda;
 import com.gerenciaProyecto.Entites.Tipoproducto;
 import com.gerenciaProyecto.Servicio.ProductoService;
-import com.gerenciaProyecto.Util.PanelBean;
 import com.gerenciaProyecto.Util.ValoresSelectOneMenu;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
@@ -36,9 +34,8 @@ public class ProductoBean implements Serializable {
     @Autowired
     private ProductoService productoService;
 
-    @ManagedProperty(value = "#{panelBean}")
-    private PanelBean panelBean;
-
+//    @ManagedProperty(value = "#{panelBean}")
+//    private PanelBean panelBean;
     private List<Producto> productos;
     private List<Producto> productosInactivos;
 
@@ -87,29 +84,28 @@ public class ProductoBean implements Serializable {
     //<editor-fold defaultstate="collapsed" desc="action">
     public void onCrearProducto(ActionEvent ev) {
         producto.setEstado(Producto.ESTADOS.ACTIVO.getEstado());
-
         if (control != null) {
-            
             producto.setIdControl(control);
         } else {
-             panelBean.showError("No se ha encontrado registro de control");
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Informacion:  ", "No se ha encontrado registro de control o de tiedas"));
+//          panelBean.showError("No se ha encontrado registro de control");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Informacion:  ", "No se ha encontrado registro de control o de tiedas"));
         }
 
         if (getIdTienda() != null || !getIdTienda().isEmpty()) {
             tienda = new Tienda(Integer.parseInt(getIdTienda()), Tienda.ESTADOS.ACTIVO.getEstado());
             producto.setIdTienda(tienda);
         } else {
-            panelBean.showWarning("Debe selecionar una tienda para asociar el producto");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registro :  ", "errado"));
+//          panelBean.showWarning("Debe selecionar una tienda para asociar el producto");
         }
 
         if (getIdTipoProducto() != null || !getIdTipoProducto().isEmpty()) {
             tipoProducto = new Tipoproducto(Integer.parseInt(getIdTipoProducto()), estado, Producto.ESTADOS.ACTIVO.getEstado());
             producto.setIdTipoproducto(tipoProducto);
         } else {
-            panelBean.showWarning("Debe selecionar una tipo de producto");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registro :  ", "errado "));
+//            panelBean.showWarning("Debe selecionar una tipo de producto");
         }
-//        producto.getIdTipoproducto();
         try {
             productoService.crear(producto);
         } catch (Exception e) {
@@ -163,6 +159,7 @@ public class ProductoBean implements Serializable {
     }
 
     public void onModificarProducto(ActionEvent event) {
+        producto.setEstado(Producto.ESTADOS.ACTIVO.getEstado());
         productoService.modificar(producto);
         producto = new Producto();
     }
@@ -295,7 +292,7 @@ public class ProductoBean implements Serializable {
 
     public LinkedList<SelectItem> getListaTiendas() {
         if (listaTiendas == null) {
-            listaTiendas = (LinkedList<SelectItem>) this.ListaTiendas() ;
+            listaTiendas = (LinkedList<SelectItem>) this.ListaTiendas();
         }
         return listaTiendas;
     }
@@ -315,8 +312,8 @@ public class ProductoBean implements Serializable {
         try {
             list = ValoresSelectOneMenu.getListTipoTienda();
         } catch (Exception e) {
-//            e.printStackTrace();
-            panelBean.showError("Error al cargar las tiendas");
+            e.printStackTrace();
+//            panelBean.showError("Error al cargar las tiendas");
         }
         return list;
     }
@@ -326,8 +323,8 @@ public class ProductoBean implements Serializable {
         try {
             list = ValoresSelectOneMenu.getListTipoProducto();
         } catch (Exception e) {
-//            e.printStackTrace();
-            panelBean.showError("Error al cargar las tipos de productos");
+            e.printStackTrace();
+//            panelBean.showError("Error al cargar las tipos de productos");
         }
         return list;
     }

@@ -173,18 +173,22 @@ public class PanelBean extends PanelPopup implements Serializable {
         this.mensaje = mensaje;
     }
 
+    @Override
     public boolean isRendered() {
         return rendered;
     }
 
+    @Override
     public void setRendered(boolean rendered) {
         this.rendered = rendered;
     }
 
+    @Override
     public String getStyleClass() {
         return styleClass;
     }
 
+    @Override
     public void setStyleClass(String styleClass) {
         this.styleClass = styleClass;
     }
@@ -193,10 +197,12 @@ public class PanelBean extends PanelPopup implements Serializable {
         return titulo;
     }
 
+    @Override
     public String getStyle() {
         return style;
     }
 
+    @Override
     public void setStyle(String style) {
         this.style = style;
     }
