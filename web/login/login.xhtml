@@ -3,13 +3,15 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
     <h:form>
+        <p:messages id="msgs" showDetail="true" closable="true" />
+        
         <p:inputText id="loger"  value="#{ingresoBeanLogin.user}"  required="true"/>
         <p:watermark for="loger" value="Username" />    
 
         <p:password id="pass" value="#{ingresoBeanLogin.password}" required="true"/>
         <p:watermark for="pass" value="Password "/>   
         
-        <p:commandButton value="LOGIN" actionListener="#{ingresoBeanLogin.onLogin}"  icon="ui-icon-key" /> 
+        <p:commandButton value="LOGIN" actionListener="#{ingresoBeanLogin.onLogin}"  icon="ui-icon-key" update="msgs" /> 
     </h:form>
 </ui:composition>
 

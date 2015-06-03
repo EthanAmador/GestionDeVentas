@@ -50,10 +50,10 @@ public class IngresoBeanLogin implements Serializable {
 
     @PostConstruct
     public void init() {
-        try{
-        usuario = new Usuario();
-        usuarioBean = new UsuarioBean();
-        }catch(Exception e){
+        try {
+            usuario = new Usuario();
+            usuarioBean = new UsuarioBean();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -62,7 +62,7 @@ public class IngresoBeanLogin implements Serializable {
     public void onLogin(ActionEvent ev) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            usuario = (Usuario)usuarioService.usuarioLogin(user);
+            usuario = (Usuario) usuarioService.usuarioLogin(user);
         } catch (Exception tr) {
             tr.printStackTrace();
         }
@@ -70,7 +70,13 @@ public class IngresoBeanLogin implements Serializable {
             if (usuario.getUsername().equals(user)) {
                 if (usuario.getPassword().equals(password)) {
                     try {
+                        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, usuario.getNombre1() + " "
+                                + usuario.getNombre2() + " "
+                                + usuario.getApellido1() + " "
+                                + usuario.getApellido2(), " Bienvenido   "));
+                        
                         context.getExternalContext().redirect("./../view/inicio.xhtml");
+
                     } catch (IOException ex) {
                         Logger.getLogger(IngresoBeanLogin.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -102,8 +108,7 @@ public class IngresoBeanLogin implements Serializable {
     }
 
     public void fake() {
-        FacesMessage msg = new FacesMessage("Usuario o Contraseña ", "No existe ");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o Contraseña ", "No existe "));
     }
 //</editor-fold>
 

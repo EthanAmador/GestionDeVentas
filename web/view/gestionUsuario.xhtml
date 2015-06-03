@@ -9,6 +9,12 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
     <ui:define name="content">
+        <div align="center">
+            <ice:outputLabel value="MÓDULO PARA LA GESTIÓN DE USUARIOS"  style="font-size: 25px;font-style: italic; color:#FFFF99; " >
+            </ice:outputLabel>
+        </div>
+
+
         <ice:form rendered="#{usuarioBean.listar}">
             <ice:panelGrid columns="1">
                 <ice:panelGrid columns="2">
@@ -26,7 +32,7 @@
                 </ice:panelGrid> 
 
                 <ice:panelGroup>  
-                    <ice:outputLabel value="Consulta Usuarios por estado : " />
+                    <ice:outputLabel value="Consulta Usuarios por estado : " style="color: #0099FF"/>
                     <ice:selectOneMenu value="#{usuarioBean.estado}">
                         <f:selectItem itemLabel="Activos" itemValue="1"/>
                         <f:selectItem itemLabel="Inactivos" itemValue="2"/>
@@ -45,8 +51,15 @@
 
         <div align="center" style="border: #000000">
             <ice:form id="idusuario" rendered="#{usuarioBean.nuevo}">
-                <p:messages id="messages" showDetail="true" autoUpdate="true" />
-                <p><h1>Por favor diligencie los campos del formulario</h1></p>
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <div  align="center"> 
+                    <p>
+                        <ice:outputLabel value="Por favor diligencie los campos del formulario" 
+                                         style="color: #0099FF;font-size: 18px;"/>
+                    </p>
+                </div>
+                <p:spacer height="10" />
+                <p:separator />
                 <ice:panelGrid columns="3" >
                     <p:outputLabel value="*" style="color: red"/>
                     <p:inputText id="identificacion" value="#{usuarioBean.usuario.identificacion}" required="true" label="Digite su identificacion"/>
@@ -100,8 +113,8 @@
                 <p:separator />
 
                 <p:panelGrid columns="2">
-                    <p:commandButton  title="registrar"  actionListener="#{usuarioBean.onCrear}" icon="ui-icon-disk"/>
-                    <p:commandButton  title="modificar" actionListener="#{usuarioBean.onModificar}" icon="ui-icon-pencil"/>
+                    <p:commandButton  title="registrar"  actionListener="#{usuarioBean.onCrear}" icon="ui-icon-disk" update="messages"  rendered="#{usuarioBean.btregistar}"/>
+                    <p:commandButton  title="modificar" actionListener="#{usuarioBean.onModificar}" icon="ui-icon-pencil"  update="messages" rendered="#{usuarioBean.btregistar}"/>
                 </p:panelGrid>
             </ice:form>
         </div>
@@ -109,7 +122,7 @@
         <!--tabla de usuarios activos en el sistema-->
         <ice:form id="listausuarios" rendered="#{usuarioBean.activo}">
             <div align="center" style="border: #000000" class="block-content">
-                <ice:dataTable  varStatus="contador" id="activos1" border="3" bgcolor="white"
+                <ice:dataTable  varStatus="contador" id="activos1" border="3" bgcolor="white" width="100%"
                                 var="usuarios" 
                                 value="#{usuarioBean.usuarios}"
                                 rows="5">
@@ -117,78 +130,97 @@
                         <f:facet name="header">
                             <ice:outputText value="#" />
                         </f:facet>
-                        <ice:outputLabel value="#{contador.index + 1}" />
+                        <div align="center">
+                            <ice:outputLabel value="#{contador.index + 1}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="id" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.id}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.id}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="identificación" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.identificacion}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.identificacion}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="nombres" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.nombre1} #{usuarios.nombre2}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.nombre1} #{usuarios.nombre2}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="apellidos" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.apellido1} #{usuarios.apellido2}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.apellido1} #{usuarios.apellido2}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="direccion" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.direccion}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.direccion}" />
+                        </div>
                     </ice:column>
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="teléfono" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.telefono}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.telefono}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="email" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.email}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.email}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="fecha nacimiento" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.fechaNacimiento}">
-                            <f:convertDateTime dateStyle="short" pattern="dd-MM-yyyy" timeZone="America/Bogota"/>
-                        </ice:outputText>
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.fechaNacimiento}">
+                                <f:convertDateTime dateStyle="short" pattern="dd-MM-yyyy" timeZone="America/Bogota"/>
+                            </ice:outputText>
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="Operaciones" />
                         </f:facet>
-                        <ice:commandButton image="/resources/Imagenes/delete.png" title="Deshabilitar"  actionListener="#{usuarioBean.onEliminar}">
-                            <f:attribute name="action" value="#{usuarios}"/>
-                        </ice:commandButton>
+                        <div align="center"> 
+                            <ice:commandButton image="/resources/Imagenes/delete.png" title="Deshabilitar"  actionListener="#{usuarioBean.onEliminar}">
+                                <f:attribute name="action" value="#{usuarios}"/>
+                            </ice:commandButton>
 
-                        <ice:commandButton image="/resources/Imagenes/edit.png"   title="Editar" actionListener="#{usuarioBean.onSeleccionarUsuario}">
-                            <f:attribute name="action" value="#{usuarios}"/>
-                        </ice:commandButton>
-
+                            <ice:commandButton image="/resources/Imagenes/edit.png"   title="Editar" actionListener="#{usuarioBean.onSeleccionarUsuario}">
+                                <f:attribute name="action" value="#{usuarios}"/>
+                            </ice:commandButton>
+                        </div>
                     </ice:column>
                 </ice:dataTable>
                 <ice:dataPaginator id="paginator_3"
@@ -202,21 +234,21 @@
                                    >
 
                     <f:facet name="previous">
-                        <ice:graphicImage url="#{styleBean.icono_arrow_previous}" style="border:none;" />
+                        <ice:graphicImage url="#{styleBean.icono_arrow_previous}" style="border:none;" title="previa" />
                     </f:facet>
 
                     <f:facet name="next">
-                        <ice:graphicImage url="#{styleBean.icono_arrow_next}" style="border:none;" />
+                        <ice:graphicImage url="#{styleBean.icono_arrow_next}" style="border:none;" title="siguiente" />
                     </f:facet>
 
                     <f:facet name="fastforward">
-                        <ice:graphicImage url="#{styleBean.icono_arrow_ff}" style="border:none;" />
+                        <ice:graphicImage url="#{styleBean.icono_arrow_ff}" style="border:none;" title="final"  />
                     </f:facet>
 
                     <f:facet name="fastrewind">
-                        <ice:graphicImage url="#{styleBean.icono_arrow_fr}" style="border:none;" />
+                        <ice:graphicImage url="#{styleBean.icono_arrow_fr}" style="border:none;" title= "inicio" />
                     </f:facet>
-                    <ice:outputFormat value="{0} , mostrando {1} , desde {2} hasta {3}. Pagina {4} / {5}" styleClass="standard" >
+                    <ice:outputFormat value="{0} Registros , , mostrando {1} , desde {2} hasta {3}. Pagina {4} / {5}" styleClass="standard" style="font-size: 18px; color:#0099FF; " >
                         <f:param value="#{rowsCount}" />
                         <f:param value="#{displayedRowsCountVar}" />
                         <f:param value="#{firstRowIndex}" />
@@ -231,7 +263,7 @@
         <!--usuarios inactivos-->
         <ice:form id="listausuariosinactivos" rendered="#{usuarioBean.inactivo}">
             <div align="center" style="border: #000000" class="block-content">
-                <ice:dataTable  varStatus="contador"  id="inactivos1" border="3" bgcolor="white"
+                <ice:dataTable  varStatus="contador"  id="inactivos1" border="3" bgcolor="white" width="100%"
                                 var="usuarios" 
                                 value="#{usuarioBean.listaTablaUsuriosInactivos}"
                                 rows="5">
@@ -239,72 +271,93 @@
                         <f:facet name="header">
                             <ice:outputText value="#" />
                         </f:facet>
-                        <ice:outputLabel value="#{contador.index + 1}" />
+                        <div align="center">
+                            <ice:outputLabel value="#{contador.index + 1}" />
+                        </div>
                     </ice:column>
+
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="id" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.id}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.id}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="identificación" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.identificacion}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.identificacion}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="nombres" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.nombre1} #{usuarios.nombre2}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.nombre1} #{usuarios.nombre2}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="apellidos" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.apellido1} #{usuarios.apellido2}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.apellido1} #{usuarios.apellido2}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="direccion" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.direccion}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.direccion}" />
+                        </div>
                     </ice:column>
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="teléfono" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.telefono}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.telefono}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="email" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.email}" />
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.email}" />
+                        </div>
                     </ice:column>
 
                     <ice:column>
                         <f:facet name="header">
                             <ice:outputText value="fecha nacimiento" />
                         </f:facet>
-                        <ice:outputText value="#{usuarios.fechaNacimiento}">
-                            <f:convertDateTime dateStyle="short" pattern="dd-MM-yyyy" timeZone="America/Bogota"/>
-                        </ice:outputText>
+                        <div align="center">
+                            <ice:outputText value="#{usuarios.fechaNacimiento}">
+                                <f:convertDateTime dateStyle="short" pattern="dd-MM-yyyy" timeZone="America/Bogota"/>
+                            </ice:outputText>
+                        </div>
                     </ice:column>
 
                     <ice:column >
                         <f:facet name="header">
                             <ice:outputText value="OPeraciones" />
                         </f:facet>
-                        <ice:commandButton image="/resources/Imagenes/activateButton.png" title="Activar"  actionListener="#{usuarioBean.onActivar}">
-                            <f:attribute name="action" value="#{usuarios}"/>
-                        </ice:commandButton>
+                        <div align="center">
+                            <ice:commandButton image="/resources/Imagenes/activateButton.png" title="Activar"  actionListener="#{usuarioBean.onActivar}">
+                                <f:attribute name="action" value="#{usuarios}"/>
+                            </ice:commandButton>
+                        </div>
                     </ice:column>
                 </ice:dataTable>
                 <ice:dataPaginator id="paginator_4"
@@ -318,21 +371,21 @@
                                    >
 
                     <f:facet name="previous">
-                        <ice:graphicImage url="#{styleBean.icono_arrow_previous}" style="border:none;" />
+                        <ice:graphicImage url="#{styleBean.icono_arrow_previous}" style="border:none;" title="previa" />
                     </f:facet>
 
                     <f:facet name="next">
-                        <ice:graphicImage url="#{styleBean.icono_arrow_next}" style="border:none;" />
+                        <ice:graphicImage url="#{styleBean.icono_arrow_next}" style="border:none;" title="siguiente" />
                     </f:facet>
 
                     <f:facet name="fastforward">
-                        <ice:graphicImage url="#{styleBean.icono_arrow_ff}" style="border:none;" />
+                        <ice:graphicImage url="#{styleBean.icono_arrow_ff}" style="border:none;" title="final"  />
                     </f:facet>
 
                     <f:facet name="fastrewind">
-                        <ice:graphicImage url="#{styleBean.icono_arrow_fr}" style="border:none;" />
+                        <ice:graphicImage url="#{styleBean.icono_arrow_fr}" style="border:none;" title= "inicio" />
                     </f:facet>
-                    <ice:outputFormat value="{0} , mostrando {1} , desde {2} hasta {3}. Pagina {4} / {5}" styleClass="standard" >
+                    <ice:outputFormat value="{0} Registros , mostrando {1} , desde {2} hasta {3}. Pagina {4} / {5}" styleClass="standard" style="font-size: 18px; color:#0099FF; " >
                         <f:param value="#{rowsCount}" />
                         <f:param value="#{displayedRowsCountVar}" />
                         <f:param value="#{firstRowIndex}" />

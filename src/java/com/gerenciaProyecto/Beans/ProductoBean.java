@@ -52,6 +52,9 @@ public class ProductoBean implements Serializable {
     private Boolean nuevo;
     private Boolean listar;
 
+    private Boolean btregistar;
+    private Boolean btModificar;
+
     private String idTienda;
     private String idTipoProducto;
 
@@ -71,6 +74,8 @@ public class ProductoBean implements Serializable {
             nuevo = false;
             activo = false;
             inactivo = false;
+            btModificar = false;
+            btregistar = false;
 
             producto = new Producto();
             control = new Control(3, Control.ESTADOS.ACTIVO.getEstado());
@@ -90,7 +95,6 @@ public class ProductoBean implements Serializable {
 //          panelBean.showError("No se ha encontrado registro de control");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Informacion:  ", "No se ha encontrado registro de control o de tiedas"));
         }
-
         if (getIdTienda() != null || !getIdTienda().isEmpty()) {
             tienda = new Tienda(Integer.parseInt(getIdTienda()), Tienda.ESTADOS.ACTIVO.getEstado());
             producto.setIdTienda(tienda);
@@ -98,7 +102,6 @@ public class ProductoBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registro :  ", "errado"));
 //          panelBean.showWarning("Debe selecionar una tienda para asociar el producto");
         }
-
         if (getIdTipoProducto() != null || !getIdTipoProducto().isEmpty()) {
             tipoProducto = new Tipoproducto(Integer.parseInt(getIdTipoProducto()), estado, Producto.ESTADOS.ACTIVO.getEstado());
             producto.setIdTipoproducto(tipoProducto);
@@ -111,9 +114,11 @@ public class ProductoBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        productos = productoService.listar();
-        producto = new Producto();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Creado de forma exitosa"));
+        producto = new Producto();
+        productos.clear();
+        productos = productoService.listar();
+
     }
 
     public void onEliminarProducto(ActionEvent event) {
@@ -150,6 +155,8 @@ public class ProductoBean implements Serializable {
         nuevo = true;
         activo = true;
         inactivo = false;
+        btregistar = true;
+        btModificar = false;
     }
 
     public void onReturn(ActionEvent event) {
@@ -162,10 +169,13 @@ public class ProductoBean implements Serializable {
         producto.setEstado(Producto.ESTADOS.ACTIVO.getEstado());
         productoService.modificar(producto);
         producto = new Producto();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Modificado de forma exitosa"));
     }
 
     public void onSelectProducto(ActionEvent event) {
         producto = (Producto) event.getComponent().getAttributes().get("action");
+        btregistar = false;
+        btModificar = true;
         onNuevoRegistro(event);
     }
 //</editor-fold>
@@ -217,6 +227,22 @@ public class ProductoBean implements Serializable {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public Boolean getBtregistar() {
+        return btregistar;
+    }
+
+    public void setBtregistar(Boolean btregistar) {
+        this.btregistar = btregistar;
+    }
+
+    public Boolean getBtModificar() {
+        return btModificar;
+    }
+
+    public void setBtModificar(Boolean btModificar) {
+        this.btModificar = btModificar;
     }
 
     public Boolean getInactivo() {

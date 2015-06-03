@@ -32,7 +32,6 @@ public class UsuarioBean implements Serializable {
 
 //    @ManagedProperty(value = "#{panelBean}")
 //    private PanelBean panelBean;
-
     private List<Usuario> usuarios;
     private List<Usuario> listaTablaUsuriosInactivos;
     private Control control;
@@ -42,6 +41,9 @@ public class UsuarioBean implements Serializable {
     private Boolean inactivo;
     private Boolean nuevo;
     private Boolean listar;
+
+    private Boolean btregistar;
+    private Boolean btModificar;
 
     private final String reqColor = "redRS";
     private final String optColor = "greenRS";
@@ -59,6 +61,9 @@ public class UsuarioBean implements Serializable {
             nuevo = false;
             activo = false;
             inactivo = false;
+
+            btModificar = false;
+            btregistar = false;
 
             control = new Control(3, Control.ESTADOS.ACTIVO.getEstado());
             usuario = new Usuario();
@@ -84,12 +89,15 @@ public class UsuarioBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        usuarios = usuarioService.listar();
-        usuario = new Usuario();
-//        panelBean.showOk("Usuario Creado de forma exitosa");
+
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Creado de forma exitosa"));
+
+        usuario = new Usuario();
+        usuarios.clear();
+        usuarios = usuarioService.listar();
+//        panelBean.showOk("Usuario Creado de forma exitosa");
     }
-    
+
     public void onEliminar(ActionEvent event) {
         usuario = (Usuario) event.getComponent().getAttributes().get("action");
         usuario.setEstado(Usuario.ESTADOS.INACTIVO.getEstado());
@@ -106,7 +114,6 @@ public class UsuarioBean implements Serializable {
         listaTablaUsuriosInactivos = usuarioService.listaInactivos();
         usuarios = usuarioService.listar();
         usuario = new Usuario();
-//          panelBean.showInfo("Registro modificado  de forma exitosa");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Modificado de forma exitosa"));
     }
 
@@ -125,6 +132,9 @@ public class UsuarioBean implements Serializable {
         nuevo = true;
         activo = true;
         inactivo = false;
+        btregistar = true;
+        btModificar = false;
+
     }
 
     public void onVolver(ActionEvent event) {
@@ -137,6 +147,9 @@ public class UsuarioBean implements Serializable {
         usuario.setEstado(Usuario.ESTADOS.ACTIVO.getEstado());
         usuarioService.modificar(usuario);
         usuario = new Usuario();
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro :  ", "Modificado de forma exitosa"));
+
     }
 
 //    public void onListarxCodigo(ActionEvent ev) {
@@ -145,6 +158,8 @@ public class UsuarioBean implements Serializable {
 //    }
     public void onSeleccionarUsuario(ActionEvent ae) {
         usuario = (Usuario) ae.getComponent().getAttributes().get("action");
+        btregistar = false;
+        btModificar = true;
         onNuevoRegistro(ae);
     }
 
@@ -229,6 +244,22 @@ public class UsuarioBean implements Serializable {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public Boolean getBtregistar() {
+        return btregistar;
+    }
+
+    public void setBtregistar(Boolean btregistar) {
+        this.btregistar = btregistar;
+    }
+
+    public Boolean getBtModificar() {
+        return btModificar;
+    }
+
+    public void setBtModificar(Boolean btModificar) {
+        this.btModificar = btModificar;
     }
 
     public String getReqColor() {
