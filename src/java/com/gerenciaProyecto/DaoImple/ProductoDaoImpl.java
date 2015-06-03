@@ -72,14 +72,12 @@ public class ProductoDaoImpl implements ProductoDao {
 
     @Override
     public Producto ObtenerProductoId(Integer p_IdProducto) {
-        List<Producto> lista = new ArrayList<Producto>();
-        Query q = em.createQuery("SELECT p FROM Producto p WHERE p.id = :id"); 
+        EntityManager emp = getEntityManager();
+        Producto lista = new Producto();
+        Query q = emp.createQuery("SELECT p FROM Producto p WHERE p.id = :id"); 
         q.setParameter("id", p_IdProducto); 
-        lista = q.getResultList(); 
-        for (Producto lista1 : lista) {
-            if(lista1.getId()== p_IdProducto)
-                return lista1; 
-        }
-        return null;
+        lista = (Producto)q.getSingleResult(); 
+
+        return lista;
     }
 }

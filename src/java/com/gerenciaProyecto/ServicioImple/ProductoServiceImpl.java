@@ -44,6 +44,6 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public Producto ObtenerProductoId(Integer p_IdProducto) {
-        return null; 
+        return productoDao.ObtenerProductoId(p_IdProducto); 
     }
 }
