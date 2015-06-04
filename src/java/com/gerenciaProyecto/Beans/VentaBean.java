@@ -28,14 +28,10 @@ public class VentaBean implements Serializable {
 
     @Autowired
     private VentaService servicioventa;
-    @Autowired
     private ProductoService productoService;
 
-    private Producto m_Producto;
-
     private String CodigoProducto;
-    private String Cantidad;
-    private String Precio;
+    private Producto m_Producto;
 
     /**
      * Creates a new instance of VentaBean
@@ -48,34 +44,20 @@ public class VentaBean implements Serializable {
     public void init() {
         try {
             CodigoProducto = "";
-            Cantidad = "0";
-            Precio ="0"; 
-            m_Producto = Producto.GetInstacia(); 
+            m_Producto = new Producto();
         } catch (Exception e) {
         }
     }
 
     //<editor-fold defaultstate="collapsed" desc="Action">
-    public void OnConsultar(ActionEvent ev) {
+    public void OnConsultar() {
         Integer _codigo = 0;
-        try {
-            _codigo = Integer.parseInt(CodigoProducto);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         try {
-            if (_codigo != 0) {
-                m_Producto = productoService.ObtenerProductoId(_codigo);
-            }
+            _codigo = Integer.parseInt(CodigoProducto);
+            m_Producto = productoService.ObtenerProductoId(_codigo);
         } catch (Exception e) {
-            e.printStackTrace();
         }
-    }
-    
-    public void OnAgregar(ActionEvent ev)
-    {
-        
     }
 
     //</editor-fold>
@@ -88,8 +70,8 @@ public class VentaBean implements Serializable {
     public void setCodigoProducto(String CodigoProducto) {
         this.CodigoProducto = CodigoProducto;
     }
-
-    public VentaService getServicioventa() {
+    
+      public VentaService getServicioventa() {
         return servicioventa;
     }
 
@@ -112,22 +94,6 @@ public class VentaBean implements Serializable {
     public void setM_Producto(Producto m_Producto) {
         this.m_Producto = m_Producto;
     }
-
-    public String getCantidad() {
-        return Cantidad;
-    }
-
-    public void setCantidad(String Cantidad) {
-        this.Cantidad = Cantidad;
-    }
-    
-      public String getPrecio() {
-        return Precio;
-    }
-
-    public void setPrecio(String Precio) {
-        this.Precio = Precio;
-    }
-    
     //</editor-fold>
+
 }
