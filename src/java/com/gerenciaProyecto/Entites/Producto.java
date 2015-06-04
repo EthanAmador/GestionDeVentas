@@ -78,6 +78,17 @@ public class Producto implements Serializable {
     private Tipoproducto idTipoproducto;
     
     
+    private static Producto m_Instancia = null; 
+    
+    public static Producto GetInstacia()
+    {
+        if(m_Instancia == null)
+        {
+            m_Instancia = new Producto(); 
+        }
+        return m_Instancia; 
+    }
+    
     public enum ESTADOS {
         ACTIVO('A'), INACTIVO('I');
         public final Character estado;
@@ -89,14 +100,14 @@ public class Producto implements Serializable {
         }
     }
 
-    public Producto() {
+    private Producto() {
     }
 
-    public Producto(Integer id) {
+    private Producto(Integer id) {
         this.id = id;
     }
 
-    public Producto(Integer id, String nombre, int cantidadproductos, BigInteger preciosCompra, BigInteger preciosVenta, int iva, Character estado) {
+    private Producto(Integer id, String nombre, int cantidadproductos, BigInteger preciosCompra, BigInteger preciosVenta, int iva, Character estado) {
         this.id = id;
         this.nombre = nombre;
         this.cantidadproductos = cantidadproductos;

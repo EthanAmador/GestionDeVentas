@@ -50,7 +50,7 @@ public class VentaBean implements Serializable {
             CodigoProducto = "";
             Cantidad = "0";
             Precio ="0"; 
-            m_Producto = new Producto();
+            m_Producto = Producto.GetInstacia(); 
         } catch (Exception e) {
         }
     }
