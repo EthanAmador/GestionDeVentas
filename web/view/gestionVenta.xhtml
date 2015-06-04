@@ -10,36 +10,15 @@
         <h:form>
             <p:panel id="panel" header="Gestión de Ventas">
                 <h:outputLabel for="CodigoProducto" value="Cod Producto:" /> 
-                <p:inputText id="IdProducto" value="#{ventaBean.codigoProducto}"/>
-                <p:commandButton  actionListener="#{ventaBean.OnConsultar}"
-                                  icon="ui-icon-circle-zoomout"/>
+                <p:inputText id="IdProducto" value="#{ventaBean.codigoProducto}" 
+                             onkeypress="if (event.keyCode == 13) {
+                                         onchange();
+                                         return false;
+                                     }">
+                    <p:ajax event="change" listener="#{ventaBean.onConsultar}" update=""/>
+                </p:inputText>
                 <h:outputLabel for="NombreProducto" value="Nombre Producto: " /> 
                 <p:inputText id="NombreProducto" value="#{ventaBean.m_Producto.nombre}" readonly="true" />
-                <h:outputLabel for="Cantidad" value="Cantidad: " /> 
-                <p:inputText id="cantidad" value="#{ventaBean.cantidad}"/>
-                <h:outputLabel for="CantidadDisponible" value="Cant Disp: " /> 
-                <p:inputText id="cantidadDisponible" value="#{ventaBean.m_Producto.cantidadproductos}" readonly="true"/>
-                <h:outputLabel for="Precio" value="Precio: " /> 
-                <p:inputText id="precio" value="#{ventaBean.precio}" />
-                <h:outputLabel for="precioProducto" value="Precio sugerido: " /> 
-                <p:inputText id="preciosugerido" value="#{ventaBean.m_Producto.preciosVenta}" readonly="true"/>
-                <p:commandButton value="AGREGAR"  icon="ui-icon-arrowthickstop-1-s" /> 
-            </p:panel>
-            <p:panel id="panelgrilla" header="productos Ventas">
-                <p:dataTable var="car" value="#{dtBasicView.cars}">
-                    <p:column headerText="Id">
-                        <h:outputText  />
-                    </p:column>
-                    <p:column headerText="Year">
-                        <h:outputText  />
-                    </p:column>
-                    <p:column headerText="Brand">
-                        <h:outputText  />
-                    </p:column>
-                    <p:column headerText="Color">
-                        <h:outputText  />
-                    </p:column>
-                </p:dataTable>
             </p:panel>
         </h:form>
     </ui:define>
