@@ -77,6 +77,7 @@ public class UsuarioBean implements Serializable {
 
     //<editor-fold defaultstate="collapsed" desc="action">
     public void onCrear(ActionEvent ev) {
+        
         usuario.setEstado(Usuario.ESTADOS.ACTIVO.getEstado());
         if (control != null) {
             usuario.setIdControl(control);
@@ -127,7 +128,7 @@ public class UsuarioBean implements Serializable {
         }
     }
 
-    public void onNuevoRegistro(ActionEvent ae) {
+    public void onNuevoRegistro(ActionEvent event) {
         listar = false;
         nuevo = true;
         activo = true;

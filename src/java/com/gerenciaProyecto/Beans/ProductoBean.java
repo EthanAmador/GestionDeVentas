@@ -36,6 +36,8 @@ public class ProductoBean implements Serializable {
 
 //    @ManagedProperty(value = "#{panelBean}")
 //    private PanelBean panelBean;
+    private VentaBean ventaBean;
+
     private List<Producto> productos;
     private List<Producto> productosInactivos;
 
@@ -88,6 +90,7 @@ public class ProductoBean implements Serializable {
 
     //<editor-fold defaultstate="collapsed" desc="action">
     public void onCrearProducto(ActionEvent ev) {
+//        if (true) {
         producto.setEstado(Producto.ESTADOS.ACTIVO.getEstado());
         if (control != null) {
             producto.setIdControl(control);
@@ -95,6 +98,7 @@ public class ProductoBean implements Serializable {
 //          panelBean.showError("No se ha encontrado registro de control");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Informacion:  ", "No se ha encontrado registro de control o de tiedas"));
         }
+
         if (getIdTienda() != null || !getIdTienda().isEmpty()) {
             tienda = new Tienda(Integer.parseInt(getIdTienda()), Tienda.ESTADOS.ACTIVO.getEstado());
             producto.setIdTienda(tienda);
@@ -102,6 +106,7 @@ public class ProductoBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registro :  ", "errado"));
 //          panelBean.showWarning("Debe selecionar una tienda para asociar el producto");
         }
+
         if (getIdTipoProducto() != null || !getIdTipoProducto().isEmpty()) {
             tipoProducto = new Tipoproducto(Integer.parseInt(getIdTipoProducto()), estado, Producto.ESTADOS.ACTIVO.getEstado());
             producto.setIdTipoproducto(tipoProducto);
@@ -118,6 +123,8 @@ public class ProductoBean implements Serializable {
         producto = new Producto();
         productos.clear();
         productos = productoService.listar();
+//        }
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Verifique  :  ", "los datos de procto"));
 
     }
 
@@ -178,6 +185,16 @@ public class ProductoBean implements Serializable {
         btModificar = true;
         onNuevoRegistro(event);
     }
+
+    public Boolean onConsultaProducto(Producto p) {
+        Boolean produc = true;
+        if (ventaBean.OnConsultar(p) != null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto :  ", " esta registrado en en sistema"));
+            produc = false;
+        }
+
+        return produc;
+    }
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="getter y setter">
@@ -187,6 +204,14 @@ public class ProductoBean implements Serializable {
 
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+    }
+
+    public VentaBean getVentaBean() {
+        return ventaBean;
+    }
+
+    public void setVentaBean(VentaBean ventaBean) {
+        this.ventaBean = ventaBean;
     }
 
     public ProductoService getProductoService() {

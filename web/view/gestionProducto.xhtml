@@ -59,38 +59,38 @@
                 <p:separator />
                 <ice:panelGrid columns="3" >
                     <p:outputLabel value="*" style="color: red"/>
-                    <p:inputText id="identificacion" value="#{productoBean.producto.codigo}" required="true" label="Digite su identificacion"/>
+                    <p:inputText id="identificacion" value="#{productoBean.producto.codigo}" required="true" label="código de producto"/>
                     <p:watermark for="identificacion" value="Código Producto" /> 
                     <p:outputLabel value="*" style="color: red"/>
-                    <p:inputText id="nombre1" value="#{productoBean.producto.nombre}" required="true" label="Digite su primer nombre"/>
+                    <p:inputText id="nombre1" value="#{productoBean.producto.nombre}" required="true" label="Nombre producto" title="nombre producto"/>
                     <p:watermark for="nombre1" value="Nombre Producto" /> 
 
                     <p:outputLabel value="*" style="color: red"/>
-                    <p:selectOneMenu id="tipoProducot" value="#{productoBean.idTipoProducto}" style="width: 205px">
-                        <f:selectItem itemLabel="Seleccione Tipo Producto" itemValue="" />
+                    <p:selectOneMenu id="tipoProducot" value="#{productoBean.idTipoProducto}" style="width: 205px" >
+                        <f:selectItem itemLabel="Sele. Tipo Producto" itemValue="" />
                         <f:selectItems value="#{productoBean.listaTipoProductos}" />
                     </p:selectOneMenu>
                     <p:watermark for="tipoProducot" value="tipo producto" /> 
 
                     <p:outputLabel value="*" style="color: red"/>
-                    <p:inputText id="apellido1" value="#{productoBean.producto.preciosCompra}" required="true" label="Precio Compra"/>
+                    <p:inputText id="apellido1" value="#{productoBean.producto.preciosCompra}" required="true" label="Precio Compra" title="Precio Compra"/>
                     <p:watermark for="apellido1" value="Precio de compra" /> 
 
                     <p:outputLabel value="*" style="color: red"/>
-                    <p:inputText id="dir" value="#{productoBean.producto.preciosVenta}"  label="Precios venta " required="true"/>
+                    <p:inputText id="dir" value="#{productoBean.producto.preciosVenta}"  label="Precios venta " required="true" title="Precios venta "/>
                     <p:watermark for="dir" value="Precio de Venta" /> 
 
                     <p:outputLabel value="*" style="color: red"/>
-                    <p:inputText id="iva" value="#{productoBean.producto.iva}" label="IVA " required="true"/>
+                    <p:inputText id="iva" value="#{productoBean.producto.iva}" label="IVA " required="true" title="IVA del producto" style="float: right; " />
                     <p:watermark for="iva" value="IVA" /> 
 
                     <p:outputLabel value="*" style="color: red"/>
-                    <p:inputText id="tel" value="#{productoBean.producto.cantidadproductos}" label="Cantida Productos" required="true"/>
+                    <p:inputText id="tel" value="#{productoBean.producto.cantidadproductos}" label="Cantida Productos" required="true" title="Cantidad de productos" style="overflow: hidden;float: right; "/>
                     <p:watermark for="tel" value="Cantidad de productos" /> 
 
                     <p:outputLabel value="*" style="color: red"/>
                     <p:selectOneMenu id="tipoTienda" value="#{productoBean.idTienda}" style="width: 205px">
-                        <f:selectItem itemLabel="Seleccione una tienda " itemValue="" />
+                        <f:selectItem itemLabel="Sele. una tienda " itemValue="" />
                         <f:selectItems value="#{productoBean.listaTiendas}" />
                     </p:selectOneMenu>
                     <p:watermark for="tipoTienda" value="tienda" /> 
@@ -103,7 +103,7 @@
                 <p:spacer height="10" />
                 <p:separator />
                 <p:panelGrid columns="2">
-                    <p:commandButton title="registrar" actionListener="#{productoBean.onCrearProducto}"  icon="ui-icon-disk" update="messages" rendered="#{productoBean.btregistar}"/>
+                    <p:commandButton title="registrar" actionListener="#{productoBean.onCrearProducto(ev)}"  icon="ui-icon-disk" update="messages" rendered="#{productoBean.btregistar}"/>
                     <p:commandButton  title="modificar" actionListener="#{productoBean.onModificarProducto}"  icon="ui-icon-pencil" update="messages" rendered="#{productoBean.btregistar}"/>
                 </p:panelGrid>
             </ice:form>
@@ -237,7 +237,7 @@
                     <f:facet name="fastrewind">
                         <ice:graphicImage url="#{styleBean.icono_arrow_fr}" style="border:none;" title= "inicio" />
                     </f:facet>
-                    
+
                     <ice:outputFormat value="{0} Registros  , mostrando {1} , desde {2} hasta {3}. Pagina {4} / {5}" styleClass="standard"  style="font-size: 18px; color:#0099FF; ">
                         <f:param value="#{rowsCount}" />
                         <f:param value="#{displayedRowsCountVar}" />
@@ -369,7 +369,7 @@
                                    pageIndexVar="pageIndex"
                                    >
 
-                   
+
                     <f:facet name="previous">
                         <ice:graphicImage url="#{styleBean.icono_arrow_previous}" style="border:none;" title="previa" />
                     </f:facet>
@@ -378,7 +378,7 @@
                         <ice:graphicImage url="#{styleBean.icono_arrow_next}" style="border:none;" title="siguiente" />
                     </f:facet>
 
-                     <f:facet name="fastforward">
+                    <f:facet name="fastforward">
                         <ice:graphicImage url="#{styleBean.icono_arrow_ff}" style="border:none;" title="final"  />
                     </f:facet>
 
