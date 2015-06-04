@@ -186,15 +186,15 @@ public class ProductoBean implements Serializable {
         onNuevoRegistro(event);
     }
 
-    public Boolean onConsultaProducto(Producto p) {
-        Boolean produc = true;
-        if (ventaBean.OnConsultar(p) != null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto :  ", " esta registrado en en sistema"));
-            produc = false;
-        }
-
-        return produc;
-    }
+//    public Boolean onConsultaProducto(Producto p) {
+//        Boolean produc = true;
+//        if (ventaBean.OnConsultar(p) != null) {
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto :  ", " esta registrado en en sistema"));
+//            produc = false;
+//        }
+//
+//        return produc;
+//    }
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="getter y setter">
